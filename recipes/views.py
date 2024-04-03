@@ -1,7 +1,6 @@
 import logging
 
 from django.contrib import messages
-from django.core.files.storage import FileSystemStorage
 from django.shortcuts import redirect, render
 
 from recipes.forms import AddRecipeForm
@@ -12,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     logger.info('index page called')
-    random_recipes = Recipe.objects.order_by('?')[:5]
+    random_recipes = Recipe.objects.order_by('?')[:6]
     context = {'recipes': random_recipes}
     return render(request, 'recipes/index.html', context)
 
@@ -33,9 +32,6 @@ def add_recipe(request):
             logger.info(
                 f'Получили {name=}, {description=}, {steps=} {preparation_time=}, {image=}.'
             )
-
-            fs = FileSystemStorage()
-            fs.save(image.name, image)
 
             recipe = Recipe(
                 category=category,
