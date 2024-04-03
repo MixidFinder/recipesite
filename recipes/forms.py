@@ -16,7 +16,7 @@ class AddRecipeForm(forms.ModelForm):
             'image',
         ]
         widgets = {
-            'category': forms.SelectMultiple(
+            'category': forms.Select(
                 attrs={
                     'class': 'form-control',
                 }

@@ -38,6 +38,7 @@ def add_recipe(request):
             fs.save(image.name, image)
 
             recipe = Recipe(
+                category=category,
                 name=name,
                 description=description,
                 steps=steps,
@@ -47,6 +48,8 @@ def add_recipe(request):
             )
 
             recipe.save()
+
+            recipe.ingredients.set(ingredients)
 
             messages.success(request, f'Рецепт: {name}, успешно создан!')
 
