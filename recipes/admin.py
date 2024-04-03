@@ -5,4 +5,4 @@ from recipes import models
 # Register your models here.
 admin.site.register(models.Recipe)
 admin.site.register(models.Ingredient)
-admin.site.register(models.RecipeCategory)
+admin.site.register(models.Category)
