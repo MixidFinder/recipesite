@@ -1,0 +1,12 @@
+{% load django_bootstrap5 %}
+
+{% block content %}
+<form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-link text-decoration-none text-white">
+    Выйти
+  </button>
+</form>
+{% endblock %}
+
+

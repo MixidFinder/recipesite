@@ -1,25 +1,58 @@
+{# Load the tag library #}
+{% load django_bootstrap5 %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Сайт рецептов{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Сайт рецептов{% endblock %}</title>
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+{% bootstrap_javascript %}
 </head>
-<body>
-    <header>
-        <h1>Сайт рецептов</h1>
-    </header>
-    <nav>
-        Тут потом будет меню
+<div class="container_menu d-flex justify-content-between bg-secondary text-white">
+    <div><h1>Сайт рецептов</h1></div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% block menu %}
+
+                <li class="nav-item"><a class="nav-link  text-white" href="{% url 'recipes:index' %}">Главная</a></li>
+                <li class="nav-item"><a class="nav-link  text-white" href="{% url 'recipes:all_recipes' %}">Все рецепты</a></li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link  text-white" href="{% url 'recipes:add_recipe' %}">Добавить рецепт</a></li>
+                    <li class="nav-item"><a class="nav-link  text-white" href="{% url 'recipes:user_recipes' username=user.username %}">Мои рецепты</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a href=""></a>{% include "registration/logout.html" %}</li>  
+                {% else %}
+                    <li class="nav-item"><a class="nav-link  text-white" href="{% url 'login' %}">Войти</a></li>
+                    <li class="nav-item"><a class="nav-link  text-white" href="{% url 'users:signup' %}">Регистрация</a></li>
+                {% endif %}
+                {% endblock menu %}
+            </ul>
+        </div>
     </nav>
-    <main>
-        {% block content %} {% endblock content %}
-    </main>
-    <footer>
-        <h5>Создатель:
-            <a href="https://github.com/MixidFinder">
-                MixidFinder
-            </a>
-        </h5>
-    </footer>
+</div>
+
+<main>
+    <div class="container">
+        {% block content %}
+        <!-- Здесь будет основное содержимое страницы -->
+        {% endblock content %}
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-secondary text-white">
+    <div class="container text-center">
+        <h5>Создатель: <a href="https://github.com/MixidFinder" class="text-white text-decoration-none">MixidFinder</a></h5>
+    </div>
+</footer>
+
+
 </body>
 </html>

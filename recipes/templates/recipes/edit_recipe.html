@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{% block title %}Редактировать рецепт{% endblock title %}
+
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        {% bootstrap_button button_type="submit" content="OK" %}
+        {% bootstrap_button button_type="reset" content="Cancel" %}
+        <a href="{% url 'recipes:delete_recipe' recipe.id %}" class="btn btn-primary">Удалить</a>
+    </form>
+{% endblock content %}

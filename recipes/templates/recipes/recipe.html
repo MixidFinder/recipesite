@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+
+{% block titile %}Рецепт {{ recipe.name }} {% endblock titile %}
+
+{% block content %}
+<div class="container">
+  <h2 class="my-4">Рецепт {{ recipe.name }}</h2>
+      <div class="col mb-4">
+        <div class="card">
+          <div style="display: flex; justify-content: center;">
+            <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.image }}" style="width: 400px; height: 400px;">
+          </div>
+          <div class="card-body">
+            <p class="card-text">Категория: {{ recipe.category }}</p>
+            <p class="card-text">Описание: {{ recipe.description }}</p>
+            <p class="card-text">Шаги: {{ recipe.steps }}</p>
+            <p class="card-text">Ингредиенты: 
+              {% for ingredient in recipe.ingredients.all %}
+                {{ ingredient.name }}
+              {% endfor %}
+            </p>
+            <p class="card-text">Время выполнения: {{ recipe.preparation_time }} минут</p>
+            <p class="card-text">Автор: {{ recipe.author }}</p>
+            {% if request.user == recipe.author %}
+            <div style="display: flex; justify-content: center;">
+                <a href="{% url 'recipes:edit_recipe' recipe.id %}" class="btn btn-primary">Редактировать</a>
+                <a href="{% url 'recipes:delete_recipe' recipe.id %}" class="btn btn-primary">Удалить</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}
