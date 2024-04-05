@@ -14,7 +14,7 @@
         {% bootstrap_form form %}
 
         {% bootstrap_button button_type="submit" content="OK" %}
-        {% bootstrap_button button_type="reset" content="Cancel" %}
+        <a href="{% url 'recipes:index' %}" class="btn btn-primary">Отмена</a>
         <a href="{% url 'recipes:delete_recipe' recipe.id %}" class="btn btn-primary">Удалить</a>
     </form>
 {% endblock content %}

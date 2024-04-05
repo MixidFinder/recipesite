@@ -74,7 +74,7 @@ def edit_recipe(request, recipe_id):
         if form.is_valid():
             form.save()
             messages.success(request, f'Рецепт "{recipe.name}" успешно обновлен!')
-            return redirect('recipes/recipe.html', {'recipe': recipe})
+            return redirect('/')
     else:
         form = EditRecipeForm(instance=recipe)
 
