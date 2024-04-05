@@ -141,8 +141,8 @@ def create_default_ingredients(sender, **kwargs):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(max_length=1000)
-    steps = models.TextField(max_length=1000)
+    description = models.TextField(max_length=200)
+    steps = models.TextField(max_length=10000)
     preparation_time = models.PositiveIntegerField()
     image = models.ImageField(upload_to='uploads/')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
