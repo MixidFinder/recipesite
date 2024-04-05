@@ -21,7 +21,7 @@
             </p>
             <p class="card-text">Время выполнения: {{ recipe.preparation_time }} минут</p>
             <p class="card-text">Автор: {{ recipe.author }}</p>
-            <a href="#" class="btn btn-primary">Подробнее</a>
+            <a href="{% url 'recipes:recipe' recipe.id %}" class="btn btn-primary">Подробнее</a>
           </div>
         </div>
       </div>
